@@ -1,0 +1,12 @@
+<page title="Blog">
+
+<h1>Blog</h1>
+
+<each loop="post in globClient('blog/*')">
+  <a
+    href="{{ post.href }}"
+    class="block overflow-hidden rounded-sm"
+  >
+    {{post.attrs.title}}
+  </a>
+</each>

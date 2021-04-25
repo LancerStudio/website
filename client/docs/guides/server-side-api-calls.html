@@ -1,0 +1,62 @@
+<page layout="_docs-layout.html" sort="40" title="Server Side API Calls">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Let's say you have a `client/foo.html` file. You can visit `/foo` in your browser and everything's great. Until one day, when you need to start displaying data from an API (or perhaps even a hosted database).
+
+How will you do this? You're already fine with a plain old HTML file; you prefer Lancer over coverting everything to next.js/nuxt/etc. And doing it in a client-side JavaScript file means you lose SSR (and it may not even be an option if you can't expose API keys).
+
+It turns out this is super easy in Lancer. Just add a `foo.server.js` file to your project:
+
+```
+client/
+├── foo.html
+├── foo.server.js
+```
+
+...with this content:
+
+```js
+export default async ({ locals }) => {
+  locals.myData = await ...
+}
+```
+
+and that's it! This file will now run before every request made to `/foo`, allowing you to use it in `foo.html`:
+
+```html
+<h1>Foo</h1>
+<p>The weather today is @{{myData.weather}}</p>
+```
+
+## Usage in Client-Side JavaScript
+
+But wait, there's more. Anything you export from `foo.server.js` is automagically available when you import it from a client-side js file!
+
+```js
+/* client/bar.server.js */
+export async function getSomeData() {
+  return await ...
+}
+```
+
+```html
+<!-- client/bar.html -->
+<h1>Bar Example</h1>
+<div id="myTarget"></div>
+<script src="/example.js"></script>
+```
+
+```js
+/* client/example.js */
+import * as Rpc from './bar.server'
+<!-- LAST TIME: -->
+<!-- LAST TIME: -->
+<!-- LAST TIME: -->
+<!-- LAST TIME: -->
+<!-- LAST TIME: -->
+```
+
+</template>

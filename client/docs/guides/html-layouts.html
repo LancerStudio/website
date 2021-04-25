@@ -1,0 +1,84 @@
+<page layout="_docs-layout.html" sort="30" title="HTML Layouts">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Single html files are great, but more often than not you're going to need common content across many pages.
+
+Lancer sets you up with a layout file already. The related concepts:
+
+- The `<page>` component
+- The `<yield>` component
+
+`<page>` is a component that you will have on nearly every page in your project. Let's start with the simplest example:
+
+```html
+<!-- client/_layout.html -->
+<!DOCTYPE html>
+<title>{{ page.title }}</title>
+<yield>
+
+<!-- client/index.html -->
+<page title="Home Page">
+<h1>Home</h1>
+```
+
+Here's the final HTML this generates:
+
+```
+<!DOCTYPE html>
+<title>Home Page</title>
+<h1>Home</h1>
+```
+
+In this example, the presence of the `<page>` tag in `client/index.html` causes Lancer to:
+
+- Automatically use `client/_layout.html` as the page's layout file
+- Assign `title` to the `page` object
+- Inject all content into the `<yield>` tag in the layout file.
+
+## Layout Files
+
+Simply having a `<page>` tag will tell Lancer to use your `client/_layout.html` file. However, you can specify which layout file you want to use:
+
+```html
+<page layout="_other_layout.html" title="Example">
+```
+
+Files in the `layout` attribute are file paths within the `client/` folder.
+
+## Nested Layouts
+
+It's possible to have a layout use another layout file. Here's an example:
+
+```html
+<!-- client/_layout.html -->
+<title>{{ page.title }} | My Website</title>
+<yield>
+
+<!-- client/_blog-layout.html -->
+<page title="{{page.title}} | Blog">
+
+<div class="blog-wrapper">
+  <yield>
+</div>
+
+<!-- client/posts/post-1.html -->
+<page title="Post 1" layout="_blog-layout.html">
+
+<h1>Post 1</h1>
+<p>some content</p>
+```
+
+This generates the final HTML:
+
+```html
+<title>Post 1 | Blog | My Website</title>
+<div class="blog-wrapper">
+  <h1>Post 1</h1>
+  <p>some content</p>
+</div>
+```
+
+</template>

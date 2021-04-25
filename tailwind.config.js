@@ -112,5 +112,8 @@ module.exports = {
         'header-alt': [`'Montserrat Alternates', 'Montserrat', sans-serif`],
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

@@ -1,0 +1,106 @@
+<page layout="_docs-layout.html" sort="20" title="Project Structure">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Lancer has three primary folders:
+
+- [`client/`](#the-client-folder), where most-if-not-all your HTML/JS/CSS content lives,
+- [`public/`](#the-public-folder), a public folder for static files, and
+- [`data/`](#the-data-folder), where Lancer stores account data, temporary data, and website builds.
+
+## The Client Folder
+
+All your HTML, JS, and CSS content goes in the `client/` folder. How you arrange them is 100% up to you.
+
+The structure of your `client/` folder determines what pages are available on your website. For example, take the following files:
+
+```
+client/
+├── _layout.html
+├── index.html
+├── blog.html
+├── blog/
+    ├── post-1.html
+    ├── post-2.html
+```
+
+This directory structure will respond to the following mapping:
+
+- `/` -> `client/index.html`
+- `/blog` -> `blog.html`
+- `/blog/post-1` -> `post-1.html`
+- `/_landing` -> **404**
+
+Note the last request. Any html file that starts with an underscore (`_`) will not be available as a page.
+
+### JavaScript and CSS
+
+JS and CSS files follow slightly different access rules. First, no `.js` or `.css` file is available by default. Take the following example:
+
+```
+client/
+├── index.html
+├── foo.js
+├── bar.js
+├── global.css
+```
+
+If `index.html` were empty, a request to `/foo.js`, `/bar.js`, and `/global.css` would all 404.
+
+In order for a JS or CSS file in `client/` to be accessible, **you must reference it in an HTML file**. For example, if `index.html` looks like this:
+
+```html
+<!-- client/index.html -->
+<script src="/foo.js"></script>
+<link rel="stylesheet" type="text/css" href="/global.css">
+<h1>Hello, World!</h1>
+```
+
+Now, `/foo.js` and `/global.css` would map to `/client/foo.js` and `/client/global.css` respectively.
+
+Note that `/bar.js` is still 404'ing. But that's ok! In practice, you'll only want *some* of your JS and CSS files to be publically accessible. And as for the inaccessible ones, you'll be [importing and including](#javascript-and-css-bundling) them for code organization.
+
+### JavaScript and CSS Bundling
+
+Lancer automatically bundles JS and CSS files within your `client/` folder using [esbuild](https://esbuild.github.io) and [PostCSS](https://postcss.org). You get bundling, minifying, and npm installs for free – no configuration required.
+
+For JavaScript, use the standard `import` syntax:
+
+```js
+import 'alpinejs'
+import React from 'react'
+import { stuff } from './bar.js'
+```
+
+For CSS, use the standard `@import` syntax:
+
+```css
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+```
+
+In development, these files are bundled on-the-fly. In production, you should use `lancer build` to generate more optimized assets.
+
+## The Public Folder
+
+All files in `public/` are made publically available. These files **do not** get any special treatment by Lancer – they get served as-is.
+
+## The Data Folder
+
+`data/` is a folder where Lancer writes a lot of internal data and caching. You should never commit this folder to git. Overviewing briefly:
+
+- `data/site.db` houses data for all of Lancer's built-in CMS features
+- `data/files/` is where user-uploaded files get written
+- `data/cache/` is where cache data goes (safe to delete anytime)
+- `data/cache/build/` is where your build files go after running `lancer build`
+
+Other than `data/cache/build/`, you probably won't have to interact with this folder.
+
+----
+
+Next: [HTML Layouts](/docs/guides/html-layouts)
+
+</template>
