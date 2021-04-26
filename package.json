@@ -10,7 +10,7 @@
     "dev": "lancer dev"
   },
   "dependencies": {
-    "@lancer/studio": "^0.6.1",
+    "@lancer/studio": "^0.6.2",
     "@tailwindcss/typography": "^0.4.0",
     "alpinejs": "^2.8.2",
     "fecha": "^4.2.1",
