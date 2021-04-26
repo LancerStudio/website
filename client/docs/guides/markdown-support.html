@@ -1,0 +1,41 @@
+<page layout="_docs-layout.html" sort="60" title="Markdown Support">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Just because Lancer is html-first doesn't mean you have to give up nice writing formats like Markdown.
+
+Instead of inventing a new syntax or file type, Lancer gives you access to a simple, yet extremely powerful concept: **Custom `<template>` tags**.
+
+Let's look at an example. Say you have this html file:
+
+```html
+<page title="My Page With Markdown">
+
+<template type="markdown">
+# @{{page.title}}
+
+This is *super* cool!
+<//template>
+```
+
+Note the `type="markdown"`. Lancer does not have special support for markdown, but it *does* allow you to transform this content!
+
+All you need to do is specify the transform in your `site.config.js` file:
+
+```js
+module.exports = {
+  name: "My Site",
+  // ...
+  templateTypes: {
+    markdown: require('marked')
+  }
+}
+```
+
+And that's it! Lancer will feed the content of your templates (with `type="markdown"`) into your `templateTypes.markdown` function, and replace it with the output of that function.
+
+Again, this isn't markdown specific; you can specify any type of template and use it in your code. Have fun with it!
+
+</template>

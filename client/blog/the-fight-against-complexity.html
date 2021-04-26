@@ -1,28 +1,48 @@
 <page
   layout="_blog-layout.html"
   title="The Fight Against Complexity"
-  date="April 23, 2021"
+  date="2021-04-25"
 >
 
 <template type="markdown">
 
-There's no better feeling than starting a fresh, greenfield project. New horizons, cleaner code, great potential – **no legacy code**!
+Starting a fresh, greenfield project feels great. New horizons, cleaner code, great potential. And best of all, **no legacy code**!
 
 But eventually – almost inevitably – the project becomes a drag to work on. You know the feeling. The hesitance. The reluctance. The *dread*.
 
-Why does this happen? Is it truly inevitable? How do we avoid it? *Can* we avoid it?
+Why does this happen? Is it inevitable? How do we avoid it? *Can* we avoid it?
 
-## It all crept up on us
+## Complexity crept up on us
 
 As web developers, there's no debate our tools have gotten more complicated over time.
 
-I started web development in 2007. Over the course of these 14 years, I've seen:
+I started web development in 2007. Over the course of these 14 years, I've seen many things:
 
-- The industry go from jQuery to heavy client JavaScript to full-on Single Page Applications
-- The increasing complexity and compile times of build tools (once called "transpilers")
-- The crazy configuration of bundling tools (<3 to browserify for staying simple)
-- The modern shoehorning of apps into serverless/kubernetes/etc, making deployment incredibly more complex.
+- The industry journey from jQuery, to heavy client-side JavaScript, to full-on Single Page Applications
+- The increasing complexity and compile times of JavaScript build tools (called "transpilers" at some point in time)
+- The ever-growing configuration of bundling tools (shoutout to browserify for staying simple)
+- The now-modern shoehorning of apps into serverless/kubernetes/etc, giving deployment alone a new full-time role.
 
-Granted, some of this was necessary to push the web forward. But now that browsers have all implemented modern HTML and have caught up on JavaScript features, it's time to reevaluate. Do we really need all this complexity?
+Granted, much of this was necessary to push the web forward. But now that progress has been made, it's time to re-evaluate.
+
+**How to we return to being simple again?**
+
+## Frameworks vs Transferrable Knowledge
+
+The problem with most web frameworks is how they force you to learn concepts that you can't transfer anywhere else. When you learn Angular, does that make learning Vue any easier? When you learn [React hooks](https://reactjs.org/docs/hooks-intro.html), does that help you pick up data management in [Marko](https://markojs.com)?
+
+Obviously not. Each of these frameworks make you learn *framework-specific knowledge* that doesn't help you anywhere else.
+
+But there's hope: **HTML, JavaScript, and CSS**.
+
+Tens of thousands of man hours have been put into designing and implementing these standards. And because of W3C's and TC39's almost unreasonable commitment to backwards compatibility, **any effort you put into learning these technologies will be relevant for years and years to come**.
+
+And that, my dear reader, is the grand motivation behind **Lancer**.
+
+## The Return to Tranferrable Knowledge
+
+[Lancer](/docs) is a return to the simple. Instead of making you learn a slew of framework-specific information, Lancer leans on **plain old HTML** as much as humanly possible. Learn standards, use them for years, and augment them with small-yet-powerful augmentations that don't invent new syntaxes nor file types.
+
+Lancer isn't done, but the result is already beautiful. [Come join us on GitHub]({{githubUrl}}) and take part in the mission.
 
 </template>

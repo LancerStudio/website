@@ -1,0 +1,30 @@
+<page layout="_docs-layout.html" sort="{{9999 + 1}}" title="Roadmap">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Lancer is revolutionizing the way we build content websites. Here is Lancer's short to medium term plan.
+
+### Dynamic Routing
+
+Lancer's current routing system is completely directory based. While very convenient, it doesn't cover the common use case of mapping a dynamic url to an html file, such as the following example:
+
+```
+GET /user/alice -> client/user.html
+GET /user/bob   -> client/user.html
+```
+
+Perhaps taking [Next.js's dynamic routing](https://nextjs.org/docs/routing/dynamic-routes) idea is appropriate here.
+
+### Structured Content
+
+Freelance feature. The "headless CMS" feature is a broken concept that unnecessarily decouples website content from the website itself, increasing code complexity and making it hard to hunt for the content you or your client want to change.
+
+Having editable, structured content should be as easy as writing some html. Lancer will have structured content as easy as the `<t>` tag in its [i18n feature](/docs/concepts/experimental-features#internationalization-i18n).
+
+### Encrypted secrets manager
+
+Freelance feature. Every website eventually has a need to share secrets, from account passwords to API keys. Instead of forcing your freelance client to create yet another account, Lancer will have a secure way of secret sharing built in.
+
+</template>

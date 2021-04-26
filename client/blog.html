@@ -1,12 +1,20 @@
 <page title="Blog">
 
-<h1>Blog</h1>
-
-<each loop="post in globClient('blog/*')">
-  <a
-    href="{{ post.href }}"
-    class="block overflow-hidden rounded-sm"
-  >
-    {{post.attrs.title}}
-  </a>
-</each>
+<div class="flex-center">
+  <ul class="mt-6 max-w-2xl">
+    <each loop="post in globClient('blog/*')">
+      <li class="px-3 flex bg-hite rounded-sm">
+        <div class="w-24 h-24 flex-center flex-shrink-0 bg-white border-2 border-gray-800">
+          <div class="font-header font-bold">{{formatBlogDate(post.attrs.date, 'MMM').toUpperCase()}}</div>
+          <div class="font-header text-4xl">{{formatBlogDate(post.attrs.date, 'D').toUpperCase()}}</div>
+        </div>
+        <a
+          href="{{ post.href }}"
+          class="px-6 self-stretch flex items-center rounded-sm text-2xl sm:text-3xl font-bold font-header"
+        >
+          {{post.attrs.title}}
+        </a>
+      </li>
+    </each>
+  </ul>
+</div>

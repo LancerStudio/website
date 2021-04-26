@@ -12,19 +12,19 @@ It turns out this is super easy in Lancer. Just add a `foo.server.js` file to yo
 
 ```
 client/
-├── foo.html
-├── foo.server.js
+├─ foo.html
+├─ foo.server.js
 ```
 
 ...with this content:
 
 ```js
 export default async ({ locals }) => {
-  locals.myData = await ...
+  locals.myData = await fetchFromSomeApi()
 }
 ```
 
-and that's it! This file will now run before every request made to `/foo`, allowing you to use it in `foo.html`:
+and that's it! This file (specifically, the **default export**) will now run before every request made to `/foo`, allowing you to use it in `foo.html`:
 
 ```html
 <h1>Foo</h1>
@@ -33,30 +33,34 @@ and that's it! This file will now run before every request made to `/foo`, allow
 
 ## Usage in Client-Side JavaScript
 
-But wait, there's more. Anything you export from `foo.server.js` is automagically available when you import it from a client-side js file!
+But wait – there's more. Anything you export from `foo.server.js` is automagically available when you import it from a client-side js file:
 
 ```js
 /* client/bar.server.js */
 export async function getSomeData() {
-  return await ...
+  return await fetchFromSomeApi()
 }
 ```
 
 ```html
 <!-- client/bar.html -->
 <h1>Bar Example</h1>
-<div id="myTarget"></div>
 <script src="/example.js"></script>
 ```
 
 ```js
 /* client/example.js */
 import * as Rpc from './bar.server'
-<!-- LAST TIME: -->
-<!-- LAST TIME: -->
-<!-- LAST TIME: -->
-<!-- LAST TIME: -->
-<!-- LAST TIME: -->
+
+Rpc.getSomeData().then(x => console.log("Got data:", x))
 ```
+
+Incredible, it works! But what's going on here?
+
+Lancer **is not** importing server-side code into your client. Instead, it intercepts the import `from './bar.server'` and generates a small RPC file it its place. As a result, when you call `Rpc.getSomeData()`, you're not running server code; you're actually running a function that calls `fetch`!
+
+----
+
+Next: [Universal JavaScript](/docs/guides/universal-javascript)
 
 </template>

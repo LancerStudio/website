@@ -1,0 +1,39 @@
+<page layout="_docs-layout.html" sort="50" title="Universal JavaScript">
+
+<template type="markdown">
+
+# {{page.title}}
+
+<aside>This feature currently only works with Mithril.js. More framework support coming soon – [create an issue](https://github.com/LancerStudio/lancer/issues) to expediate your favorite!</aside>
+
+Lancer's flagship feature is being as close to plain HTML as possible, allowing you to learn and rely on knowledge you can use *anywhere*. However, sometimes you just need a fancy UI with dynamic API querying, and plain HTML just won't cut it.
+
+Fortunately, Lancer has a great solution. It turns out the `<include>` tag has a second, more advanced usage: JavaScript SSR & hydration!
+
+Let's say you have a `client/greeter.js` file that looks like this:
+
+```js
+import m from 'mithril'
+
+export default {
+  view({ attrs }) {
+    return m('div', `Welcome, ${attrs.name}!`)
+  }
+}
+```
+
+In an html file you can write:
+
+```html
+<page title="Example">
+<h1>Universal JavaScript</h1>
+<include src="greeter.js" args="{ name: 'Alice' }">
+```
+
+and you've got it! Lancer will automatically generate HTML using your greeter component, and also generate & include a client-side js file to run on page load for user interactivity 😎
+
+----
+
+Next: [Markdown Support](/docs/guides/markdown-support)
+
+</template>

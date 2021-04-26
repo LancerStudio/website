@@ -16,3 +16,14 @@ body {
 [x-cloak] {
   display: none !important;
 }
+
+.prose aside {
+  background: rgba(235, 241, 245, 1);
+  @apply p-4 flex rounded-sm text-base;
+}
+.prose aside > svg {
+  @apply flex-shrink-0 h-6 w-6 mt-0.5;
+}
+.prose aside > div {
+  @apply flex-1 ml-2;
+}

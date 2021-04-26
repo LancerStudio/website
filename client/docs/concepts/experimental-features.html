@@ -1,0 +1,59 @@
+<page layout="_docs-layout.html" sort="9999" title="Experimental Features">
+
+<template type="markdown">
+
+# {{page.title}}
+
+<aside>The following features are experimental. They are highly likely to change!</aside>
+
+Lancer is revolutionizing the way we build content websites. Below are some features currently being worked on.
+
+## Dynamic Image Resizing
+
+For any image file in your `data/files` directory, you can request a resized version of that image quite easily. Great for image galleries or responsive image definitions.
+
+For example, to create a gallery preview image definition, you can put this in your `site.config.js`:
+
+```js
+module.exports = {
+  name: 'My App',
+  // ...
+
+  //
+  // See resize options here: https://sharp.pixelplumbing.com/api-resize#resize
+  //
+  imagePreviews: sharp => ({
+    myGalleryDef: {
+      width: 360,
+      height: 240,
+      fit: sharp.fit.outside,
+    },
+  })
+}
+```
+
+Now, assuming you have an image file in `data/files/my-page/my-image.jpg`, you can request a smaller size like so:
+
+```html
+<img src="/files/my-page/my-image.jpg?preview=myGalleryDef" />
+```
+
+And that's it! Lancer will generate and cache the image for you in `data/cache`.
+
+## Internationalization (i18n)
+
+<aside>This is a freelance feature.</aside>
+
+Lancer gives your freelance client a super-easy way to edit translations on their website.
+
+To start, just use the `<t>` tag in your html. For example:
+
+```
+<t>home.header.title</t>
+```
+
+The server will render this on the page, and make it editable if you're signed in. Simply **alt-click** the text and a textarea will appear on the screen.
+
+`hreflang` attributes are added according to [Google's recommendations](https://developers.google.com/search/docs/advanced/crawling/localized-versions)
+
+</template>
