@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "lancer production",
-    "build": "lancer build",
+    "build": "lancer build --static",
     "init": "lancer init",
     "dev": "lancer dev"
   },
