@@ -6,9 +6,9 @@
 
 Let's say you have a `client/foo.html` file. You can visit `/foo` in your browser and everything's great. Until one day, when you need to start displaying data from an API (or perhaps even a hosted database).
 
-How will you do this? You're already fine with a plain old HTML file; you prefer Lancer over coverting everything to next.js/nuxt/etc. And doing it in a client-side JavaScript file means you lose SSR (and it may not even be an option if you can't expose API keys).
+How will you do this? You're already fine with a plain old HTML file; you prefer Lancer over coverting everything to next.js/nuxt/etc. And doing it in a client-side JavaScript file means you lose SSR – and that may not even be an option if you can't expose API keys!
 
-It turns out this is super easy in Lancer. Just add a `foo.server.js` file to your project:
+As it turns out, this is super easy to do in Lancer. Just add a `foo.server.js` file to your project:
 
 ```
 client/
@@ -33,7 +33,7 @@ and that's it! This file (specifically, the **default export**) will now run bef
 
 ## Usage in Client-Side JavaScript
 
-But wait – there's more. Anything you export from `foo.server.js` is automagically available when you import it from a client-side js file:
+But wait – there's more. Anything you export from `foo.server.js` is *automagically available* when you import it from a client-side js file:
 
 ```js
 /* client/bar.server.js */
