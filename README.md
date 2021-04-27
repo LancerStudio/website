@@ -1,6 +1,6 @@
 # Lancer Studio Website
 
-The source code for [lancer.studio](https://lancer.studio).
+The source code for [lancer.studio](https://lancer.studio), made with [Lancer](https://github.com/LancerStudio/lancer).
 
 ## Getting Started
 
