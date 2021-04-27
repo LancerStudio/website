@@ -26,12 +26,12 @@ client/
     ├── post-2.html
 ```
 
-This directory structure will respond to the following mapping:
+This directory structure will respond to the following URL mappings:
 
 - `/` -> `client/index.html`
-- `/blog` -> `blog.html`
-- `/blog/post-1` -> `post-1.html`
-- `/_landing` -> **404**
+- `/blog` -> `client/blog.html`
+- `/blog/post-1` -> `client/blog/post-1.html`
+- `/_layout` -> **404**
 
 Note the last request. Any html file that starts with an underscore (`_`) will not be available as a page.
 
