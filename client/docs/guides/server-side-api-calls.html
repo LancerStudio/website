@@ -59,6 +59,8 @@ Incredible, it works! But what's going on here?
 
 Lancer **is not** importing server-side code into your client. Instead, it intercepts the import `from './bar.server'` and generates a small RPC file it its place. As a result, when you call `Rpc.getSomeData()`, you're not running server code; you're actually running a function that calls `fetch`!
 
+Not only does this reduce boilerplate to a bare minimum, it also allows you to re-use data fetching functions across page load (the default export function) and client JS.
+
 ----
 
 Next: [Universal JavaScript](/docs/guides/universal-javascript)
