@@ -4,24 +4,24 @@
   <div class="md:mt-24 max-w-sm relative top-[-4px]">
     <h3 class="uppercase text-gray-900 font-header font-bold">Guides</h3>
     <ul class="mt-3 space-y-3">
-      <each loop="docPage in globClient('docs/guides/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
+      <for let="docPage of globClient('docs/guides/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
         <li>
           <a href="{{ docPage.href }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
             {{docPage.attrs.title}}
           </a>
         </li>
-      </each>
+      </for>
     </ul>
 
     <h3 class="mt-9 uppercase text-gray-900 font-header font-bold">Concepts</h3>
     <ul class="mt-3 space-y-3">
-      <each loop="docPage in globClient('docs/concepts/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
+      <for let="docPage of globClient('docs/concepts/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
         <li>
           <a href="{{ docPage.href }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
             {{docPage.attrs.title}}
           </a>
         </li>
-      </each>
+      </for>
     </ul>
   </div>
 

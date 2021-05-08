@@ -25,5 +25,5 @@ body {
   @apply flex-shrink-0 h-6 w-6 mt-0.5;
 }
 .prose aside > div {
-  @apply flex-1 ml-2;
+  @apply flex-1 ml-2 md:ml-3;
 }

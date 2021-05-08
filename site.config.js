@@ -15,8 +15,6 @@ module.exports = {
       return marked(source)
         .replace(/&lt;\/\/template&gt;/,'&lt;/template&gt;')
         .replace(/<aside>(.*)<\/aside>/g, (_, body) => wrapAside(body))
-        .replace('%7B%7B', '{{')
-        .replace('%7D%7D', '}}')
     }
   }
 }
