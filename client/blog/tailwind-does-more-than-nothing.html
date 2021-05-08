@@ -1,0 +1,168 @@
+<page
+  layout="_blog-layout.html"
+  title="Tailwind Does More than Nothing"
+  date="2021-05-07"
+>
+
+<template type="markdown">
+
+[Tailwind CSS](https://tailwindcss.com) has been greatly increasing in popularity lately, and like any new tech, heated debates about its usefulness have arisen along with it.
+
+Personally, I love Tailwind. And I would be more than happy to leave it at that, as I don't need the social approval of others to have confidence and satisfaction in my technical decisions.
+
+However, certain arguments seem to be growing in mindshare. Arguments that are... not exactly valid. So while I'd be happier doing nothing, I decided to write a low-biased critique of Tailwind as someone who has used it extensively, because I prefer the people I work with to disagree with my decisions for *good* reasons rather than bad ones.
+
+### Approach
+
+In this post we will simply go through common arguments for & against tailwind, and evaluate each one in a low-biased manner.
+
+## Arguments Against Using Tailwind
+
+### It's just inline styles
+
+Probably the most common and repulsive first impression of Tailwind is the thought, "how is this any better than inline styles?". As an argument, proponents take advantage of the "inline styles are bad" consensus and attempt apply the bad connotation to Tailwind classes, as the two solutions look similar at a first glance.
+
+This argument works well on bystanders because it *isn't* obvious how they're different; you have to use them to get a better idea of how.
+
+First and foremost, they're *not* inline styles. They're classes, and as such you gain benefits of using CSS classes. When you use `text-blue-500` and `bg-blue-500`, you can be sure they're the same color, and updating them only requires a change a single place.
+
+Secondly, inline styles don't support media queries. I can't tell you how many times I've done something like `text-2xl md:text-3xl lg:text-5xl` to get a header sizing just right on all screens. And those values are all configurable.
+
+In short, this argument is **not valid**.
+
+### It's not maintainable
+
+Better maintainability is the *primary purpose* of CSS utility libraries. It gives you a guarantee of **only changing one element's style** when you edit that element's class set. In other words, you can change your HTML's styling with the confidence you won't be breaking any other part of the site.
+
+Every dev agrees that maintainability is the biggest pitfall of plain CSS, thanks to its cascading behavior. And I've seen it time and time again. As your stylesheet grows over time, you become more and more reluctant to change existing CSS rules, and prefer to write new rules instead.
+
+This is why the industry invented conventions like [BEM](http://getbem.com) and [SMACSS](http://smacss.com). And while these conventions *work*, I don't see anyone particularly *excited* about them enough to say they're the perfect solution. And indeed, people have been trying to find better solutions since.
+
+In short, this argument is **not valid**.
+
+### It's hard to read
+
+Although its classes are well-designed (aside from some quirks like `leading`), Tailwind *is* a DSL, and that takes time and effort to learn before reaping the (IMO big) benefits.
+
+Class strings can also get long. To combat this, I use a convention: margin/padding first, then layout, then asthetics, with media query classes grouped together by rule.
+
+This argument is **valid**.
+
+### It makes your repeat yourself
+
+In my ten years of experience in web, reusing a CSS class for more than one part of the page has been extremely rare. Because CSS is a flow-type layout engine, even the same conceptual element on a page will need different rules in different places.
+
+However, there are exceptions. The most common is a `.button` class, especially since buttons are so interactively complex. Tailwind's `@apply` directive is a simple solution to this problem:
+
+```css
+.button {
+  @apply bg-brand-500 hover:bg-brand-600 text-white p-2 ...;
+}
+```
+
+You might think, doesn't this defeat the purpose of Tailwind? Not so. First, your `@apply` classes still take advantage of the values you've configured for colors, spacing, media queries, and so on. And second, if you need `@apply` for even 10% of your CSS, the other 90% is there to show Tailwind's purpose has not been defeated.
+
+Personally, I always create a `Button` component in Mithril/React/whatever, so using `@apply` is pretty rare anyway.
+
+In short, this argument is **not valid**.
+
+### HTML should not be concerned with styling
+
+I've lived long enough to see the common dogma transition from keeping HTML, CSS, and JavaScript all in separate files ("separation of concerns") to realizing "wait, these three are actually all one concern when it comes to components". And truly, when much of HTML is already littered with `<div>`'s dedicated to achieve styling and layout concerns, I don't find this argument very convincing.
+
+Still, this argument is **valid** depending on your ideals.
+
+### It adds complexity
+
+Compared to plain CSS, Tailwind adds much more than zero to your CSS configuration and build pipeline.
+
+On the other hand, it's not much more complex than using [SASS](https://sass-lang.com), and even less if you're already using [PostCSS](https://postcss.org).
+
+This argument is **valid**.
+
+## Arguments For Using Tailwind
+
+Some of the arguments above already illustrate why Tailwind is good. Here's a few more that weren't covered.
+
+### It makes CSS easier
+
+Tailwind does not make CSS any easier. In fact, if you don't know CSS very well, I do not recommend using Tailwind.
+
+This argument is **not valid**.
+
+### It helps you build a design system
+
+Now we're getting into my own, personal arguments. The biggest benefit to using Tailwind is building your web app/website's **design system**.
+
+A downside of using plain CSS is the sheer flexibily of it. If you're not disciplined, you'll be tempted to choose a `16px` font size for one part of the page and `18px` for another. Not only can this be bad typography design, but having all numbers available to you also forces you to spend more time thinking about it than you should.
+
+Tailwind was made by designers, so they understand this problem. In any tailwind project you can count on having presets such as:
+
+- Box model (`p-2`, `p-4`, `m-2`, `mb-2`, `mx-2`, etc.)
+- Font sizes (`text-xs`, `text-sm`, ..., `text-xl`, `text-2xl`, etc)
+- Color palettes (`bg-blue-100`, `bg-blue-200`, ..., `bg-blue-900`, `text-blue-100`, etc)
+- Breakpoints (`md:text-xl`, `lg:text-2xl`, etc.)
+- Fonts (via the default stylesheet)
+- Spacing (`p-2` for two configurable units of padding, etc.)
+- [Animations](https://tailwindcss.com/docs/animation#spin) (spin, ping, pulse, bounce)
+
+With available plugins for [forms](https://github.com/tailwindlabs/tailwindcss-forms), [longform content](https://github.com/tailwindlabs/tailwindcss-typography) (like this blog post), and more.
+
+There's a lot more to design systems than this, but Tailwind gives you a solid foundation to making one. And you can benefit even more when you mirror these values with your design tools (e.g. Figma), giving you a common language between design and code.
+
+### It provides good defaults
+
+In addition to the previous point, Tailwind offers utility classes for common layout concerns (`flex`, `flex-1`, `items-center`), and some innovative ones like `divide-y`, which [adds a border in-between each child element](https://tailwindcss.com/docs/divide-width#add-borders-between-stacked-children).
+
+### It reduces mental overhead
+
+Tailwind's design system foundation saves you time thinking about arbitrary numbers, and instead lets you *explore* your predefined values to see which ones look best.
+
+But more than that, the mere fact that you don't have to invent CSS class names for every one of your HTML elements – or worry about your HTML structure when using CSS combinators – really reduces the overhead of making your pages look great.
+
+### You can still use CSS
+
+Using Tailwind doesn't mean you can't use CSS! Here's a snippet of the CSS used for the `<aside>` tag on this site, of which you can see [on this page](http://localhost:7272/docs/guides/universal-javascript):
+
+```css
+.prose aside {
+  background: rgba(235, 241, 245, 1);
+  @apply p-4 flex rounded-sm text-base;
+}
+.prose aside > svg {
+  @apply flex-shrink-0 h-6 w-6 mt-0.5;
+}
+.prose aside > div {
+  @apply flex-1 ml-2 md:ml-3;
+}
+```
+
+## Caveats when using Tailwind
+
+Lasty, I'm going to list some issues using Tailwind that come from experience, even if I don't commonly hear about these points in the wild.
+
+### Classes can't be dynamic
+
+For Tailwind to detect and generate your classes, you can't write `text-${color}-500`. You need to write out the full class like `text-red-500` and `text-blue-500`. Pretty annoying at times.
+
+### Dot-syntax poses a problem
+
+If you use class dot-syntax for hyperscript libraries like Mithril, Tailwind will fail to pick up your class when you have it next to an interpolation:
+
+```js
+m('p.mt-4.bg-blue${ more }')
+```
+
+Here `.bg-blue` is probably read as `.bg-blue$` by Tailwind, and thus it generates no class for it.
+
+### Don't use it for CSS grids
+
+Tailwind has [some](https://tailwindcss.com/docs/grid-template-columns) [utilities](https://tailwindcss.com/docs/grid-template-rows) for CSS grids, but they're almost never useful. Just stick to plain CSS for your grid needs.
+
+## Conclusion
+
+Like any tech, Tailwind has pros and cons. I believe the pros outweigh the cons in most cases. But as always, do what's best for your project and your team.
+
+And lastly, if you're looking for a web framework that's close to plain HTML as possible, check out [Lancer](http://localhost:7272/docs) and [star it on GitHub](https://github.com/LancerStudio/lancer) :)
+
+</template>
