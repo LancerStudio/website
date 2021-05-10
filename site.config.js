@@ -3,6 +3,7 @@ const marked = require('marked')
 
 module.exports = {
   name: "Lancer Studio",
+  origin: 'https://lancer.studio',
   locales: ['en'],
 
   locals: {

@@ -6,7 +6,7 @@
     <ul class="mt-3 space-y-3">
       <for let="docPage of globClient('docs/guides/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
         <li>
-          <a href="{{ docPage.href }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
+          <a href="{{ docPage.path }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
             {{docPage.attrs.title}}
           </a>
         </li>
@@ -17,7 +17,7 @@
     <ul class="mt-3 space-y-3">
       <for let="docPage of globClient('docs/concepts/*').sort((a,b) => +a.attrs.sort-b.attrs.sort)">
         <li>
-          <a href="{{ docPage.href }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
+          <a href="{{ docPage.path }}" class="text-gray-900 {{ docPage.path == page.path ? 'underline' : '' }}">
             {{docPage.attrs.title}}
           </a>
         </li>
