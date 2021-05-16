@@ -15,6 +15,7 @@ module.exports = {
     markdown(source) {
       return marked(source)
         .replace(/&lt;\/\/template&gt;/,'&lt;/template&gt;')
+        .replace(/\\{{/,'{{') // temp
         .replace(/<aside>(.*)<\/aside>/g, (_, body) => wrapAside(body))
     }
   }
