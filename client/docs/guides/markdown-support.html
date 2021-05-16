@@ -14,7 +14,7 @@ Let's look at an example. Say you have this html file:
 <page title="My Page With Markdown">
 
 <template type="markdown">
-# \{{page.title}}
+# Blog: \{{page.title}}
 
 This is just a plain old `<template>` tag. *Super* cool!
 <//template>
@@ -34,7 +34,14 @@ module.exports = {
 }
 ```
 
-And that's it! Lancer will feed the content of your templates (with `type="markdown"`) into your `templateTypes.markdown` function, and replace it with the output of that function.
+And that's it! Lancer will feed the content of your templates (with `type="markdown"`) into your `templateTypes.markdown` function, and replace it with the output of that function. In this case you'll get:
+
+```html
+<!doctype html>
+<h1>Blog: My Page With Markdown</h1>
+
+<p>This is just a plain old <code>&lt;template&gt;</code> tag. <i>Super</i> cool!</p>
+```
 
 Again, this isn't markdown specific; you can specify any template type you want and use it in your code. Have fun with it!
 
