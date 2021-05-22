@@ -4,33 +4,48 @@
 
 # {{page.title}}
 
-<aside>This feature currently only works with Mithril.js. More framework support coming soon – [create an issue](https://github.com/LancerStudio/lancer/issues) to expediate your favorite!</aside>
+<aside>This feature is **experimental** and currently only works with Mithril.js. More framework support coming soon – [create an issue](https://github.com/LancerStudio/lancer/issues) to expediate your favorite!</aside>
 
 Lancer's flagship feature is being as close to plain HTML as possible, allowing you to learn and rely on knowledge you can use *anywhere*. However, sometimes you just need a fancy UI with dynamic API querying, and plain HTML just won't cut it.
 
 Fortunately, Lancer has a great solution. It turns out the `<include>` tag has a second, more advanced usage: JavaScript SSR & hydration!
 
-Let's say you have a `client/greeter.js` file that looks like this:
+Let's say you have an html file that looks like this:
+
+```html
+<page title="Universal JavaScript Example">
+<h1>Hello!</h1>
+<include src="greeter.js" args="{ name: 'Alice' }">
+```
+
+Notice how we're using `<include>` for a **.js** file instead of a .html file! And also note how we're passing in data via the `args` attribute.
+
+Now let's look at `client/greeter.js`, the file we're including:
 
 ```js
 import m from 'mithril'
 
-export default {
+const MyComponent = {
   view({ attrs }) {
     return m('div', `Welcome, ${attrs.name}!`)
   }
 }
+
+// The cool stuff!
+export default function mount({ dom, args }) {
+  if (dom) {
+    m.mount(dom, MyComponent)
+  }
+  else {
+    return m(MyComponent, { name: args.name })
+  }
+}
 ```
 
-In an html file you can write:
+And that's it! Lancer will run your .js file twice:
 
-```html
-<page title="Example">
-<h1>Universal JavaScript</h1>
-<include src="greeter.js" args="{ name: 'Alice' }">
-```
-
-and you've got it! Lancer will automatically generate HTML using your greeter component, and also generate & include a client-side js file to run on page load for user interactivity 😎
+1. On the server to generate HTML (this is when `dom` in `function mount` is null)
+2. On the client via a generated `script` tag to run on page load for user interactivity 😎 (this is when `dom` in `function mount` is present)
 
 ----
 
