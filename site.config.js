@@ -1,8 +1,9 @@
-const flecha = require('fecha')
-const marked = require('marked')
+import flecha from 'fecha'
+import marked from 'marked'
 
-module.exports = {
+export default {
   name: "Lancer Studio",
+  static: true,
   origin: 'https://lancer.studio',
   locales: ['en'],
 
@@ -12,10 +13,11 @@ module.exports = {
   },
 
   templateTypes: {
-    markdown(source) {
+    markdown(source, _attrs, config) {
+      config.recurse = false
       return marked(source)
         .replace(/&lt;\/\/template&gt;/,'&lt;/template&gt;')
-        .replace(/\\{{/,'{{') // temp
+        .replace(/\\{{/g,'{{') // temp
         .replace(/<aside>(.*)<\/aside>/g, (_, body) => wrapAside(body))
     }
   }

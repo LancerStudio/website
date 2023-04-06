@@ -92,11 +92,12 @@ const exportedColors = [
 ]
 
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './client/**/*.html',
     './client/**/*.js',
+    './client/**/*.jsx',
     './client/**/*.ts',
+    './client/**/*.tsx',
   ],
   theme: {
     extend: {
@@ -123,6 +124,14 @@ module.exports = {
             },
           },
         },
+
+        lg: {
+          css: {
+            'h2': {
+              'margin-bottom': '0.5em',
+            }
+          }
+        }
       },
     }
   },

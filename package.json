@@ -5,17 +5,17 @@
   "license": "MIT",
   "scripts": {
     "start": "lancer production",
-    "build": "lancer build --static",
+    "build": "lancer build",
     "init": "lancer init",
     "dev": "lancer dev"
   },
   "dependencies": {
-    "@lancer/studio": "^0.8.1",
-    "@tailwindcss/typography": "^0.4.0",
+    "@lancer/studio": "^0.23.0",
+    "@tailwindcss/typography": "^0.5.9",
     "alpinejs": "^2.8.2",
     "fecha": "^4.2.1",
     "marked": "^2.0.3",
     "microlight": "0.0.7",
-    "tailwindcss": "^2.1.1"
+    "tailwindcss": "^3.3.1"
   }
 }

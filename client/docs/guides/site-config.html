@@ -1,0 +1,109 @@
+<page layout="/_docs-layout.html" sort="55" title="site.config.js">
+
+<template type="markdown">
+
+# {{page.title}}
+
+Lancer provides simple site-wide configuration via a `site.config.js` file in your project's root folder. It looks something like this:
+
+```js
+export default {
+  name: "My Website",
+  static: false,
+  origin: 'https://example.com',
+  locales: ['en'],
+}
+
+```
+
+In this file you can specify several options, listed below.
+
+## static
+
+When `static` is set to true, running `lancer build` will generate a full static website.
+
+## locals
+
+There is often common logic you will need to access throughout your pages. The `locals` property is a good way to make functions and values available:
+
+```js
+  locals: {
+    myGlobalVariable: 'https://other.example.com',
+    myGlobalFunction(string) {
+      return '#' + string
+    }
+  },
+
+```
+
+With this, you now use the interpolation syntax `\{{}}` to make use of them:
+
+```html
+<p>Lorem ipsum \{{ myGlobalFunction('dolor') }}</p>
+```
+
+### Local modules
+
+Don't think you have to define them inline! It's easy to expose an entire module instead:
+
+```js
+import * as Links from './lib/links'
+
+export default {
+  // ...
+  locals: {
+    Links
+  }
+}
+```
+
+## templateTypes
+
+Although Lancer is html-based, that doesn't mean you can't have nice DSLs defined in your markup.
+
+Use the `templateTypes` to support `<template>` tags with any type string you want:
+
+```js
+export default {
+  // ...
+  templateTypes: {
+    'fancy-snippet'(templateBodyHtml, attrs) {
+      return renderCodeEditor(templateBodyHtml, attrs.lang)
+    }
+  }
+}
+```
+
+Then, in any html file:
+
+
+```html
+<template type="fancy-snippet" lang="rust">
+ fn main() {
+    println!("Hello, World!");
+  }
+<//template>
+```
+
+See [Markdown Support](/docs/guides/markdown-support) for a full example.
+
+## bundleAliases
+
+Lancer uses [esbuild](https://esbuild.github.io) to bundle your JS files. Although extremely fast, one downside is some modules are not compatible with the browser, due to node.js specific dependencies.
+
+Fortunately, open source devs have written js-only version of many of these dependencies.
+
+You can use `bundleAliases` to re-map these imports to their browser-compatible counterparts. For example:
+
+```js
+export default {
+  // ...
+  bundleAliases: {
+    'path': 'npm:path-browserify'
+  }
+}
+```
+
+With this, any attempts to import `path` in a JS bundle will now import `path-browserify` instead.
+
+</template>

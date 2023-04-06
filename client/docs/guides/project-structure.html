@@ -1,4 +1,4 @@
-<page layout="_docs-layout.html" sort="20" title="Project Structure">
+<page layout="/_docs-layout.html" sort="20" title="Project Structure">
 
 <template type="markdown">
 
@@ -37,30 +37,19 @@ Note the last request. Any html file that starts with an underscore (`_`) will n
 
 ### JavaScript and CSS
 
-JS and CSS files follow slightly different access rules. First, no `.js` or `.css` file is available by default. Take the following example:
+JS and CSS files follow the same rules. Any `.js` or `.css` file is available by default. Take the following example:
 
 ```
 client/
 ├── index.html
 ├── foo.js
-├── bar.js
+├── _bar.js
 ├── global.css
 ```
 
-If `index.html` were empty, a request to `/foo.js`, `/bar.js`, and `/global.css` would all 404.
-
-In order for a JS or CSS file in `client/` to be accessible, **you must reference it in an HTML file**. For example, if `index.html` looks like this:
-
-```html
-<!-- client/index.html -->
-<script src="/foo.js"></script>
-<link rel="stylesheet" type="text/css" href="/global.css">
-<h1>Hello, World!</h1>
-```
-
-Now, `/foo.js` and `/global.css` would map to `/client/foo.js` and `/client/global.css` respectively.
-
-Note that `/bar.js` is still 404'ing. But that's ok! In practice, you'll only want *some* of your JS and CSS files to be publically accessible. And as for the inaccessible ones, you'll be [importing and including](#javascript-and-css-bundling) them for code organization.
+- A request to `/foo.js` will succeed.
+- A request to `/_bar.js` will fail.
+- However, `foo.js` is free to `import {whatever} from './_bar.js`, because Lancer bundles `foo.js` automatically.
 
 ### JavaScript and CSS Bundling
 
@@ -71,7 +60,7 @@ For JavaScript, use the standard `import` syntax:
 ```js
 import 'alpinejs'
 import React from 'react'
-import { stuff } from './bar.js'
+import { stuff } from './_bar.js'
 ```
 
 For CSS, use the standard `@import` syntax:
@@ -92,9 +81,7 @@ All files in `public/` are made publically available. These files **do not** get
 
 `data/` is a folder where Lancer writes a lot of internal data and caching. You should never commit this folder to git. Overviewing briefly:
 
-- `data/site.db` houses data for all of Lancer's built-in CMS features
-- `data/files/` is where user-uploaded files get written
-- `data/cache/` is where cache data goes (safe to delete anytime)
+- `data/cache/` is where cache data goes (safe to delete at anytime)
 - `data/cache/build/` is where your build files go after running `lancer build`
 
 Other than `data/cache/build/`, you probably won't have to interact with this folder.

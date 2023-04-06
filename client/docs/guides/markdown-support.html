@@ -1,4 +1,4 @@
-<page layout="_docs-layout.html" sort="60" title="Markdown Support">
+<page layout="/_docs-layout.html" sort="60" title="Markdown Support">
 
 <template type="markdown">
 
@@ -25,11 +25,15 @@ Note the `type="markdown"`. Lancer does not have special support for markdown, b
 All you need to do is specify the transform in your `site.config.js` file:
 
 ```js
-module.exports = {
+import marked from 'marked'
+
+export default {
   name: "My Site",
   // ...
   templateTypes: {
-    markdown: require('marked')
+    markdown(innerHtml) {
+      return marked(innerHtml)
+    }
   }
 }
 ```

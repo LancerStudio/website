@@ -1,23 +1,35 @@
-<page layout="_docs-layout.html" title="Getting Started">
+<page layout="/_docs-layout.html" title="Getting Started">
 
 <template type="markdown">
 
-# Welcome, Developer
+# Welcome to Lancer
 
-<div class="-mt-6 text-3xl text-gray-600 font-light">You've arrived at Lancer Studio.</div>
+<div class="-mt-6 text-3xl text-gray-600 font-light">Let's build content websites together.</div>
 
-Gone are the days of spaghetti boilerplate, unintuitive syntaxes, and messy configuration files. You're about to learn a better way to develop websites.
+## Quick Start
 
-<aside>Lancer is currently in **alpha**. It works great for what it does, but some useful features are still missing.</aside>
+To create a project from scratch:
 
-To better understand how and why, here are some core principles Lancer adheres to:
+```
+$ mkdir my-proj && cd my-proj
+$ npm init -y
+$ npm install @lancer/studio
+$ npx lancer init all
+$ npm run dev
+```
+
+Now visit [localhost:7272](http://localhost:7272) to view your new project.
+
+## Core Concepts
+
+Here are some core principles Lancer adheres to:
 
 - Content **always** starts with an html file. No special file types to learn or remember.
-- No new syntaxes. Use the HTML you already know and love.
+- No new syntaxes. Use the HTML you already know and love, plus basic interpolation brackets.
 - Automatic, no-config JavaScript and CSS bundling.
 - Intuitive server-side JavaScript when you need it.
 
-To get started with Lancer, check out the [Installation](/docs/guides/installation) and [Project Structure](/docs/guides/project-structure) doc pages.
+To get started with Lancer, check out the [Project Structure](/docs/guides/project-structure) doc page.
 
 ## When Should You Use Lancer?
 
@@ -29,5 +41,9 @@ Lancer is ideal for content-based websites. This includes websites such as:
 - Personal blogs
 
 Lancer DOES NOT cater to fully-JS-rendered apps. If you're building a full-fledged web app, I suggest using Lancer for your landing, marketing, about, etc. pages, and then something like Ruby on Rails or Next.js for your heavy application code on an `app.example.com` subdomain.
+
+----
+
+Next: [Project Structure](/docs/guides/project-structure)
 
 </template>

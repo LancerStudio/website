@@ -1,4 +1,4 @@
-<page layout="_docs-layout.html" sort="30" title="HTML Layouts">
+<page layout="/_docs-layout.html" sort="30" title="HTML Layouts">
 
 <template type="markdown">
 
@@ -6,17 +6,20 @@
 
 Single html files are great, but more often than not you're going to need common content across many pages.
 
-Lancer sets you up with a layout file already. The related concepts:
+Lancer generates your project with a simple layout file. The concepts you need to know are:
 
-- The `<page>` component
-- The `<yield>` component
+- The `<page>` tag
+- The `<yield>` tag
+- The `<content-for>` tag
+
+## The \<page> Tag
 
 `<page>` is a component that you will have on nearly every page in your project. Let's start with the simplest example:
 
 ```html
 <!-- client/_layout.html -->
 <!DOCTYPE html>
-<title>{{ page.title }}</title>
+<title>\{{ page.title }}</title>
 <yield>
 
 <!-- client/index.html -->
@@ -40,13 +43,13 @@ In this example, the presence of the `<page>` tag in `client/index.html` causes 
 
 ## Layout Files
 
-Simply having a `<page>` tag will tell Lancer to use your `client/_layout.html` file. However, you can specify which layout file you want to use:
+Simply having a `<page>` tag will tell Lancer to use your `client/_layout.html` file. However, you can also specify **which** layout file you want to use:
 
 ```html
-<page layout="_other_layout.html" title="Example">
+<page layout="/_other_layout.html" title="Example">
 ```
 
-Files in the `layout` attribute are file paths within the `client/` folder.
+Files in the `layout` attribute are file paths relative to the `client/` folder.
 
 ## Nested Layouts
 
@@ -54,19 +57,17 @@ It's possible to have a layout use another layout file. Here's an example:
 
 ```html
 <!-- client/_layout.html -->
-<title>{{ page.title }} | My Website</title>
+<title>\{{ page.title }} | My Website</title>
 <yield>
 
 <!-- client/_blog-layout.html -->
-<page title="{{page.title}} | Blog">
-
+<page title="\{{page.title}} | Blog">
 <div class="blog-wrapper">
   <yield>
 </div>
 
 <!-- client/posts/post-1.html -->
-<page title="Post 1" layout="_blog-layout.html">
-
+<page title="Post 1" layout="/_blog-layout.html">
 <h1>Post 1</h1>
 <p>some content</p>
 ```
