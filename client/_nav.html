@@ -6,7 +6,7 @@
         <button
           type="button"
           @click="open = !open"
-          class="p-2 inline-flex items-center justify-center rounded-md text-gray-400 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition duration-300"
+          class="p-2 inline-flex items-center justify-center rounded-md text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition duration-300"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -36,20 +36,20 @@
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
         <a href="/" class="flex items-center flex-shrink-0">
           <img class="block h-6 w-auto" src="/logo-icon.svg" alt="Lancer Logo">
-          <span class="ml-2 font-header-alt font-bold text-xl text-gray-900">Lancer</span>
+          <span class="ml-2 font-header-alt font-bold text-xl text-gray-900 dark:text-gray-500">Lancer</span>
         </a>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <a href="/blog" class="text-gray-800 hover:text-black hover:bg-white px-3 py-2 rounded-md transition duration-300">Blog</a>
-            <a href="/docs" class="text-gray-800 hover:text-black hover:bg-white px-3 py-2 rounded-md transition duration-300">Docs</a>
+            <a href="/blog" class="text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-gray-200 hover:bg-white dark:hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Blog</a>
+            <a href="/docs" class="text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-gray-200 hover:bg-white dark:hover:bg-gray-700 px-3 py-2 rounded-md transition duration-300">Docs</a>
           </div>
         </div>
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <a href="https://twitter.com/LancerStudioWeb" class="flex items-center text-gray-800 hover:bg-gray-100 px-3 py-2 rounded-md opacity-75 hover:opacity-100 transition duration-300">
+        <a href="https://twitter.com/LancerStudioWeb" class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 px-3 py-2 rounded-md opacity-75 hover:opacity-100 transition duration-300">
           <img class="block h-4 w-auto relative" src="/vendor/twitter-icon.svg" alt="Twitter Logo">
         </a>
-        <a href="{{githubUrl}}" class="flex items-center text-gray-800 hover:bg-gray-100 px-3 py-2 rounded-md opacity-75 hover:opacity-100 transition duration-300">
+        <a href="{{githubUrl}}" class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 px-3 py-2 rounded-md opacity-75 hover:opacity-100 transition duration-300">
           <img class="block h-5 w-auto" src="/vendor/github-icon.svg" alt="GitHub Logo">
         </a>
       </div>
@@ -68,11 +68,11 @@
     x-transition:leave-start="opacity-100 scale-100"
     x-transition:leave-end="opacity-0 scale-95"
   >
-    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-gray-700 divide-y-2 divide-gray-50 dark:divide-transparent">
       <button
         type="button"
         @click="open = !open"
-        class="mt-2 ml-1 p-2 bg-white rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition duration-300"
+        class="mt-2 ml-1 p-2 bg-white dark:bg-transparent rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition duration-300"
       >
         <span class="sr-only">Close menu</span>
         <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -85,13 +85,13 @@
       </div>
       <div class="px-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="/" class="{{page.path === '/' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 transition duration-300" aria-current="page">Home</a>
+        <a href="/" class="{{page.path === '/' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300" aria-current="page">Home</a>
 
-        <a href="/blog" class="{{page.path === '/blog' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 transition duration-300" aria-current="page">Blog</a>
+        <a href="/blog" class="{{page.path === '/blog' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300" aria-current="page">Blog</a>
 
-        <a href="/blog" class="{{page.path === '/docs' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 transition duration-300" aria-current="page">Docs</a>
+        <a href="/blog" class="{{page.path === '/docs' ? 'underline' : ''}} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300" aria-current="page">Docs</a>
 
-        <a href="{{githubUrl}}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 transition duration-300" aria-current="page">GitHub</a>
+        <a href="{{githubUrl}}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300" aria-current="page">GitHub</a>
       </div>
     </div>
   </div>
